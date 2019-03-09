@@ -8,7 +8,8 @@ let getCitas = (req, res) => {
   let idPaciente = req.params.idpaciente
   Paciente.findById(idPaciente).populate('citas')
     .then(data => {
-      return res.json(data)
+      let citas = data.citas
+      return res.json(citas)
     })
     .catch(err => {
       return res.json.status(500).json({
@@ -20,7 +21,7 @@ let getCitas = (req, res) => {
 
 let getCita = (req, res) => {
   let idCita = req.params.id
-  Cita.findById(idCita)
+  Cita.findOne({_id: idCita})
     .then(data => {
       return res.json(data)
     })
