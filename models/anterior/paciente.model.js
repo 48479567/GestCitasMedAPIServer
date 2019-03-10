@@ -16,11 +16,10 @@ let PacienteSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Doctor'
   },
-  citaproxima: Number,
-  citas: {
+  citas: [{
     type: Schema.Types.ObjectId,
     ref: 'Cita'
-  }
+  }]
 })
 
 module.exports = mongoose.model('Paciente', PacienteSchema, 'paciente')

@@ -1,7 +1,7 @@
 const Sucursal = require('../../models/sucursal.model'),
   Paciente = require('../../models/paciente.model'),
   Doctor = require('../../models/doctor.model'),
-  Cita = require('../../models/cita.model')
+  Citas = require('../../models/citas.model')
 
 let getPacientes = (req, res) => { 
   let idSucursal = req.params.idsucursal
@@ -17,24 +17,25 @@ let getPacientes = (req, res) => {
     })
 }
 
-let getPaciente = (req, res) => {
-  let idPaciente = req.params.id
-  Paciente.findById(idPaciente)
-    .then(data => {
-      return res.json(data)
-    })
-    .catch(err => {
-      return res.status(500).json({
-        ok: false,
-        err
-      })
-    })
-}
 
 let getPacientesTipo = (req, res) => { 
   let idSucursal = req.params.idsucursal,
-    tipo = req.params.tipo
+  tipo = req.params.tipo
   Paciente.find({sucursal: idSucursal, tipo: tipo})
+  .then(data => {
+    return res.json(data)
+  })
+  .catch(err => {
+    return res.status(500).json({
+      ok: false,
+      err
+    })
+  })
+}
+
+let getPaciente = (req, res) => {
+  let idPaciente = req.params.id
+  Paciente.findOne({_id: idPaciente})
     .then(data => {
       return res.json(data)
     })
@@ -48,7 +49,7 @@ let getPacientesTipo = (req, res) => {
 
 module.exports = { getPacientes, getPaciente, getPacientesTipo }
 
-// {
+//
 //   "_id" : ObjectId("5c7c7ce104113717318d793a"),
 //   "nombre" : "Sucursal 1",
 //   "direccion" : "Direccion Sucursal 1",

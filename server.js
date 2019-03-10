@@ -27,7 +27,7 @@ app
 
 app.use(require('./routes'))
 
-mongoose.connect('mongodb://localhost/gcm')
+mongoose.connect('mongodb://localhost/gcm', { useNewUrlParser: true })
   .then(db => c('Conectado a la Base de Datos'))
   .catch(err => ce(err))
 

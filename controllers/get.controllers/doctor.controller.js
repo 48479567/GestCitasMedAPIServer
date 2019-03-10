@@ -4,7 +4,7 @@ const Doctor = require('../../models/doctor.model'),
 
 let getDoctores = (req, res) => {
   let idSucursal = req.params.idsucursal
-  Sucursal.findById(idSucursal).populate('doctores')
+  Doctor.find({sucursal: idSucursal})
     .then(data => {
       return res.json(data)
     })

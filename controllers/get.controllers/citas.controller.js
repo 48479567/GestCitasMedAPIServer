@@ -1,18 +1,31 @@
-const Cita = require('../../models/cita.model'),
+const Citas = require('../../models/citas.model'),
   Sucursal = require('../../models/sucursal.model'),
   Paciente = require('../../models/paciente.model'),
   Doctor = require('../../models/doctor.model')
 
-
-let getCitas = (req, res) => {
-  let idPaciente = req.params.idpaciente
-  Paciente.findById(idPaciente).populate('citas')
+let getCitasByPaciente = (req, res) => { 
+  let { idpaciente } = req.params
+  Citas.findOne({paciente: idpaciente})
     .then(data => {
-      let citas = data.citas
-      return res.json(citas)
+      return res.json(data.sesiones)
     })
     .catch(err => {
-      return res.json.status(500).json({
+      return res.status(500).json({
+        ok: false,
+        err
+      })
+    })
+}
+
+
+let getCitas = (req, res) => {
+  let id = req.params.id
+  Citas.findById(id)
+    .then(data => {
+      return res.json(data.sesiones);
+    })
+    .catch(err => {
+      return res.status(500).json({
         ok: false,
         err
       })
@@ -20,20 +33,22 @@ let getCitas = (req, res) => {
 }
 
 let getCita = (req, res) => {
-  let idCita = req.params.id
-  Cita.findOne({_id: idCita})
+  let idCita = req.params.id,
+    indexSesion = req.params.index
+  Citas.findOne({_id: idCita})
     .then(data => {
-      return res.json(data)
+      let sesiones = data.sesiones
+      return res.json(sesiones[indexSesion])
     })
     .catch(err => {
-      return res.json.status(500).json({
+      return res.status(500).json({
         ok: false,
         err
       })
     })
 }
 
-module.exports = { getCita, getCitas }
+module.exports = { getCitasByPaciente, getCita, getCitas }
 
 
 // let citas = [
