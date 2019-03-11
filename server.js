@@ -32,6 +32,6 @@ mongoose.connect('mongodb://localhost/gcm', { useNewUrlParser: true })
   .catch(err => ce(err))
 
 app.listen(app.get('port'), () => { 
-  c(`API Servidor corriendo en el Puerto ${app.get('port')}`)
+  c(`API Servidor corriendo en el puerto ${app.get('port')}`)
 })
 
