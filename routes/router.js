@@ -8,6 +8,7 @@ const express = require('express'),
       { getCitasByPaciente, getCitas, getCita } = require('../controllers/get.controllers/citas.controller'),
 
       { putDoctor } = require('../controllers/put.controllers/doctor.controller'),
+      { putCita } = require('../controllers/put.controllers/citas.controller'),
 
       { postPaciente } = require('../controllers/post.controllers/paciente.controller'),
       // { postCitaVacia } = require('../controllers/post.controllers/citas.controller')
@@ -37,5 +38,6 @@ router
 //router put
 router
   .put('/doctor/:id', putDoctor)
+  .put('/cita/:id/:index', putCita)
 
 module.exports = router
