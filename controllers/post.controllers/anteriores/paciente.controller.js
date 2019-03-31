@@ -1,5 +1,5 @@
 const Paciente = require('../../models/paciente.model'),
-  Cita = require('../../models/cita.model')
+  Citas = require('../../models/citas.model')
 
 let postPaciente = (req, res) => { 
   let body = req.body
@@ -10,7 +10,6 @@ let postPaciente = (req, res) => {
     telefono: body.telefono,
     tipo: body.tipo,
     fecharegistro: body.fecharegistro,
-    fechaprimaria: body.fechaprimaria,
     sucursal: body.sucursal,
     ultimodoctor: body.ultimodoctor,
     citaproxima: body.citaproxima,
@@ -18,9 +17,13 @@ let postPaciente = (req, res) => {
   })
   savePaciente.save()
     .then((paciente) => {
-      let saveCitas = new Cita({idpaciente: paciente._id, numero: 1, tratamiento: "", descripcion: "", fechaprogramada: 5, fechaejecutada: 0, recurrencia: 1, tipocita: "normal", doctor: body.ultimodoctor, sucursal: body.sucursal})
+      let saveCitas = new Citas({paciente: paciente._id, sesiones: []})
       saveCitas.save()
-      return res.json(paciente._id)
+        .then((citas) => {
+          Paciente.updateOne({_id: paciente._id}, {$set: {citas: citas._id}}).then(() => {
+            return res.json(citas._id)
+        })
+      })
     })
     .catch(err => {
       console.error(err)
@@ -28,4 +31,3 @@ let postPaciente = (req, res) => {
 }
 
 module.exports = { postPaciente }
-

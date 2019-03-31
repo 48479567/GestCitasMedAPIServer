@@ -22,7 +22,7 @@ let getCitas = (req, res) => {
   let id = req.params.id
   Citas.findById(id)
     .then(data => {
-      return res.json(data.sesiones);
+      return res.json(data.sesiones)
     })
     .catch(err => {
       return res.status(500).json({

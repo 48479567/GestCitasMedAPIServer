@@ -7,7 +7,8 @@ let PacienteSchema = new Schema({
   edad: Number,
   telefono: String,
   tipo: String,
-  fecharegistro: Date,
+  fecharegistro: Number,
+  fechaprimaria: Number,
   sucursal: {
     type: Schema.Types.ObjectId,
     ref: 'Sucursal'
@@ -16,7 +17,7 @@ let PacienteSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Doctor'
   },
-  citaproxima: Number,
+  citaproxima: Schema.Types.Mixed,
   citas: {
     type: Schema.Types.ObjectId,
     ref: 'Cita'

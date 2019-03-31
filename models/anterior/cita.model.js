@@ -1,24 +1,12 @@
 const mongoose = require('mongoose'),
   Schema = mongoose.Schema
 
-let CitaSchema = new Schema({
-  numero: Number,
-  tratamiento: String,
-  descripcion: String,
-  estado: {
-    type: Boolean,
-    default: false
+let CitasSchema = new Schema({
+  paciente: {
+  type: Schema.Types.ObjectId,
+  ref: 'Paciente'
   },
-  fechaprogramada: Date,
-  fechaejecutada: Date,
-  doctor: {
-    type: Schema.Types.ObjectId,
-    ref: 'Doctor'
-  },
-  sucursal: {
-    type: Schema.Types.ObjectId,
-    ref: 'Sucursal'
-  }
+  sesiones: [Object]
 })
 
-module.exports = mongoose.model('Cita', CitaSchema, 'cita')
+module.exports = mongoose.model('Citas', CitasSchema, 'citas')

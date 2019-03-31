@@ -1,7 +1,7 @@
 const Sucursal = require('../../models/sucursal.model'),
   Doctor = require('../../models/doctor.model'),
   Paciente = require('../../models/paciente.model'),
-  Cita = require('../../models/citas.model')
+  Cita = require('../../models/cita.model')
 
 let putDoctor = (req, res) => {
   let body = req.body,

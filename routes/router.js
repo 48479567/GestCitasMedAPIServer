@@ -5,10 +5,10 @@ const express = require('express'),
       { getSucursales } = require('../controllers/get.controllers/sucursal.controller'),
       { getDoctores, getDoctor } = require('../controllers/get.controllers/doctor.controller'),
       { getPacientes, getPaciente, getPacienteByDNI, getPacientesTipo } = require('../controllers/get.controllers/paciente.controller'),
-      { getCitasByPaciente, getCitas, getCita } = require('../controllers/get.controllers/citas.controller'),
+      { getCitasByPaciente, getCitas, getCita } = require('../controllers/get.controllers/cita.controller'),
 
       { putDoctor } = require('../controllers/put.controllers/doctor.controller'),
-      { putCita } = require('../controllers/put.controllers/citas.controller'),
+      { putCita } = require('../controllers/put.controllers/cita.controller'),
 
       { postPaciente } = require('../controllers/post.controllers/paciente.controller'),
       // { postCitaVacia } = require('../controllers/post.controllers/citas.controller')
