@@ -1,5 +1,6 @@
 const Paciente = require('../../models/paciente.model'),
-  Cita = require('../../models/cita.model')
+  Cita = require('../../models/cita.model'),
+  { entryCitas } = require('../../config/variables/entry.variables/citas')
 
 let postPaciente = (req, res) => { 
   let body = req.body
@@ -11,15 +12,36 @@ let postPaciente = (req, res) => {
     tipo: body.tipo,
     fecharegistro: body.fecharegistro,
     fechaprimaria: body.fechaprimaria,
+    recurrencia: body.recurrencia,
     sucursal: body.sucursal,
     ultimodoctor: body.ultimodoctor,
     citaproxima: body.citaproxima,
     citas: "5c8494512375069042dcaaf2",
   })
+  
+  let fechaProgramada = ''
+  if (body.tipo == 'embarazo' || body.tipo == 'cred') {
+    fechaProgramada = body.fechaprimaria
+  } else {
+    fechaProgramada = body.fecharegistro
+  }
+
   savePaciente.save()
     .then((paciente) => {
-      let saveCitas = new Cita({idpaciente: paciente._id, numero: 1, tratamiento: "", descripcion: "", fechaprogramada: 5, fechaejecutada: 0, recurrencia: 1, tipocita: "normal", doctor: body.ultimodoctor, sucursal: body.sucursal})
-      saveCitas.save()
+      let entryCitasSaved = entryCitas(
+        body.tipo, 
+        paciente._id, 
+        fechaProgramada, 
+        body.recurrencia, 
+        paciente.ultimodoctor, 
+        paciente.sucursal)
+
+      Cita.insertMany(entryCitasSaved)
+    .then(
+      console.log('Guardado con exito')
+    )
+      // let saveCitas = new Cita(entryCitasSaved)
+      // saveCitas.save()
       return res.json(paciente._id)
     })
     .catch(err => {

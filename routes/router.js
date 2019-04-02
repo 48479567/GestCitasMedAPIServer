@@ -5,7 +5,7 @@ const express = require('express'),
       { getSucursales } = require('../controllers/get.controllers/sucursal.controller'),
       { getDoctores, getDoctor } = require('../controllers/get.controllers/doctor.controller'),
       { getPacientes, getPaciente, getPacienteByDNI, getPacientesTipo } = require('../controllers/get.controllers/paciente.controller'),
-      { getCitasByPaciente, getCitas, getCita } = require('../controllers/get.controllers/cita.controller'),
+      { getCitasByPaciente } = require('../controllers/get.controllers/cita.controller'),
 
       { putDoctor } = require('../controllers/put.controllers/doctor.controller'),
       { putCita } = require('../controllers/put.controllers/cita.controller'),
@@ -25,8 +25,8 @@ router
   .get('/paciente/:id', getPaciente)
   .get('/paciente/dni/:dni', getPacienteByDNI)
   .get('/paciente/citas/:idpaciente', getCitasByPaciente)
-  .get('/citas/:id', getCitas)
-  .get('/cita/:id/:index', getCita)
+  // .get('/citas/:id', getCitas)
+  // .get('/cita/:id/:index', getCita)
   .get('/dni/:dni', getDNI)
   // .post('/paciente')
 

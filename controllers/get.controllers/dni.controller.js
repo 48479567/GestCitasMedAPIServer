@@ -12,6 +12,10 @@ let getDNI = (req, res, next) => {
 
   ajaxDNI(dni)
     .then(data => {
+      if (!data.data) {
+        let objetoVacio = { nombres: ''}
+        return res.send(objetoVacio)
+      }
       let datoLegible = data.data.split('|').join(' ')
       let objetoDNI = { nombres: datoLegible }
       return res.send(objetoDNI)

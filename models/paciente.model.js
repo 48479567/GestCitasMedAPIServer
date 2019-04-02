@@ -9,6 +9,7 @@ let PacienteSchema = new Schema({
   tipo: String,
   fecharegistro: Number,
   fechaprimaria: Number,
+  recurrencia: Number,
   sucursal: {
     type: Schema.Types.ObjectId,
     ref: 'Sucursal'
@@ -22,6 +23,8 @@ let PacienteSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Cita'
   }
+
+  
 })
 
 module.exports = mongoose.model('Paciente', PacienteSchema, 'paciente')
