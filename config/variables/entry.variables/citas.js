@@ -26,7 +26,7 @@ let entryCitas = (
 
   let citas = [];
 
-  for (let numero = 0; numero < diasTratamiento.length; numero++) {
+  for (let numero = 1; numero < diasTratamiento.length; numero++) {
     let cita = {
       idpaciente,
       numero: numero,
