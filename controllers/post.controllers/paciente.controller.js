@@ -4,6 +4,7 @@ const Paciente = require('../../models/paciente.model'),
 
 let postPaciente = (req, res) => { 
   let body = req.body
+
   let savePaciente = new Paciente({
     dni: body.dni,
     nombres: body.nombres,
@@ -26,6 +27,8 @@ let postPaciente = (req, res) => {
     fechaProgramada = body.fecharegistro
   }
 
+  let pacienteId = ''
+
   savePaciente.save()
     .then((paciente) => {
       let entryCitasSaved = entryCitas(
@@ -36,13 +39,14 @@ let postPaciente = (req, res) => {
         paciente.ultimodoctor, 
         paciente.sucursal)
 
-      Cita.insertMany(entryCitasSaved)
-    .then(
-      console.log('Guardado con exito')
-    )
+    pacienteId = paciente._id
+
+    return Cita.insertMany(entryCitasSaved)
       // let saveCitas = new Cita(entryCitasSaved)
       // saveCitas.save()
-      return res.json(paciente._id)
+    })
+    .then(() => {
+      return res.json(pacienteId)
     })
     .catch(err => {
       console.error(err)
