@@ -2,12 +2,14 @@ const express = require('express'),
       mongoose = require('mongoose'),
       bodyParser = require('body-parser'),
       app = express(),
+      CONNECTION_URI = 'mongodb+srv://admin:admin@clusterprojects-e96mt.mongodb.net/gcm?retryWrites=true'
       c = console.log,
-      ce = console.error
+      ce = console.error,
 
 // set
 app
   .set('port', process.env.PORT || 3000)
+  .set('connecturi', 'mongodb://localhost/gcm')
 
   .use((req, res, next) => { 
     // Esto hace que cualquier peticion este disponible para la api.
@@ -27,7 +29,12 @@ app
 
 app.use(require('./routes'))
 
-mongoose.connect('mongodb://localhost/gcm', { useNewUrlParser: true })
+
+//Esto mayormente sirve para la implementacion de promesas nativas. Ahora no es tan necesario la implementacion
+mongoose.Promise = global.Promise
+// mongoose.set('debug', true)
+
+mongoose.connect(app.get('connecturi'), { useNewUrlParser: true })
   .then(db => c('Conectado a la Base de Datos'))
   .catch(err => ce(err))
 

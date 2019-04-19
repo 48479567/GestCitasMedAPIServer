@@ -3,19 +3,7 @@ const mongoose = require('mongoose'),
 
 let SucursalSchema = new Schema({
   nombre: String,
-  direccion: String,
-  encargado: {
-    type: Schema.Types.ObjectId,
-    ref: 'Doctor'
-  },
-  doctores: [{
-    type: Schema.Types.ObjectId,
-    ref: 'Doctor'
-  }],
-  pacientes: [{
-    type: Schema.Types.ObjectId,
-    ref: 'Paciente'
-  }]
+  direccion: String,  
 })
 
 module.exports = mongoose.model('Sucursal', SucursalSchema, 'sucursal')
