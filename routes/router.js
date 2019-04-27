@@ -11,6 +11,7 @@ const express = require('express'),
       { putCita } = require('../controllers/put.controllers/cita.controller'),
 
       { postPaciente } = require('../controllers/post.controllers/paciente.controller'),
+      { postDoctor } = require('../controllers/post.controllers/doctor.controller'),
       // { postCitaVacia } = require('../controllers/post.controllers/citas.controller')
 
       router = express.Router()
@@ -33,6 +34,7 @@ router
 //router post
 router
   .post('/paciente', postPaciente)
+  .post('/doctores', postDoctor)
   // .post('/citas/:idpaciente', postCitaVacia)
 
 //router put

@@ -6,10 +6,6 @@ let DoctorSchema = new Schema({
   password: String,
   nombres: String,
   telefono: String,
-  pacientes: [{
-    type: Schema.Types.ObjectId,
-    ref: 'Paciente'
-  }],
   sucursal: {
     type: Schema.Types.ObjectId,
     ref: 'Sucursal'

@@ -17,11 +17,10 @@ let postPaciente = (req, res) => {
     sucursal: body.sucursal,
     ultimodoctor: body.ultimodoctor,
     citaproxima: body.citaproxima,
-    citas: "5c8494512375069042dcaaf2",
   })
   
   let fechaProgramada = ''
-  if (body.tipo == 'embarazo' || body.tipo == 'cred') {
+  if (body.tipo == 'gestante') {
     fechaProgramada = body.fechaprimaria
   } else {
     fechaProgramada = body.fecharegistro

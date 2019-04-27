@@ -1,5 +1,5 @@
-const { indicadorDia } = require('../static.variables/date'),
-  { diasVacuna, diasEmbarazo, diasCred } = require('../static.variables/dias.citas')
+const { indicadorDia, } = require('../static.variables/date'),
+  { diasInfante, diasGestante, } = require('../static.variables/dias.citas')
 
 
 let entryCitas = (
@@ -13,14 +13,11 @@ let entryCitas = (
   let diasTratamiento = []
 
   switch (tipopaciente) {
-    case 'vacuna':
-      diasTratamiento = diasVacuna
+    case 'infante':
+      diasTratamiento = diasInfante
       break
-    case 'embarazo':
-      diasTratamiento = diasEmbarazo
-      break
-    case 'cred':
-      diasTratamiento = diasCred
+    case 'gestante':
+      diasTratamiento = diasGestante
       break
   }
 

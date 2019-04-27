@@ -1,4 +1,4 @@
-const diasVacuna = [
+const diasInfante = [
   0,
   5,
   10,
@@ -11,7 +11,7 @@ const diasVacuna = [
 
 ]
 
-const diasEmbarazo = [
+const diasGestante = [
   0,
   10,
   20,
@@ -23,18 +23,8 @@ const diasEmbarazo = [
 
 ]
 
-const diasCred = [
-  0,
-  5,
-  12,
-  15,
-  18,
-
-]
-
 module.exports = {
-  diasVacuna,
-  diasEmbarazo,
-  diasCred,
-  
+  diasInfante,
+  diasGestante,
+
 }

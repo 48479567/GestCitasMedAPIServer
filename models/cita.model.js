@@ -4,7 +4,7 @@ const mongoose = require('mongoose'),
 let CitaSchema = new Schema({
   idpaciente: {
     type: Schema.Types.ObjectId,
-    ref: 'Paciente' 
+    ref: 'Paciente'
   },
   numero: Number,
   tratamiento: String,
