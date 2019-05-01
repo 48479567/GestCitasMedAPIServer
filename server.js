@@ -18,6 +18,7 @@ app
   .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'hbs')
 
+
   .use((req, res, next) => { 
     // Esto hace que cualquier peticion este disponible para la api.
     res.header("Access-Control-Allow-Origin", "*")
@@ -27,7 +28,6 @@ app
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next()
   })
-
   .use(bodyParser.urlencoded({extended: true}))
   .use(bodyParser.json())
   .use(express.static(path.join(__dirname, 'public')))

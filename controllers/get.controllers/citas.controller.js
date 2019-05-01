@@ -1,13 +1,11 @@
-const Cita = require('../../models/cita.model'),
-  Sucursal = require('../../models/sucursal.model'),
-  Paciente = require('../../models/paciente.model'),
-  Doctor = require('../../models/doctor.model')
+const Citas = require('../../models/citas.model')
+
 
 let getCitasByPaciente = (req, res) => { 
   let { idpaciente } = req.params
-  Cita.find({idpaciente: idpaciente})
-    .then(citas => {
-      return res.json(citas)
+  Citas.findOne({ paciente: idpaciente })
+    .then(cita => {
+      return res.json(cita)
     })
     .catch(err => {
       return res.status(500).json({
@@ -19,10 +17,10 @@ let getCitasByPaciente = (req, res) => {
 
 
 let getCitas = (req, res) => {
-  let id = req.params.id
-  Cita.findById(id)
-    .then(data => {
-      return res.json(data.sesiones)
+  let { id } = req.params
+  Citas.findById(id)
+    .then(cita => {
+      return res.json(cita)
     })
     .catch(err => {
       return res.status(500).json({
@@ -35,9 +33,9 @@ let getCitas = (req, res) => {
 let getCita = (req, res) => {
   let idCita = req.params.id,
     indexSesion = req.params.index
-  Cita.findOne({_id: idCita})
-    .then(data => {
-      let sesiones = data.sesiones
+  Citas.findOne({ _id: idCita })
+    .then(cita => {
+      let sesiones = cita.sesiones
       return res.json(sesiones[indexSesion])
     })
     .catch(err => {
@@ -48,6 +46,7 @@ let getCita = (req, res) => {
     })
 }
 
-module.exports = { getCitasByPaciente, getCitas, getCita, }
+
+module.exports = { getCitasByPaciente, getCita, getCitas, }
 
 
