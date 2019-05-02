@@ -20,15 +20,13 @@ let putCita = (req, res) => {
   }
  
   Citas.findOneAndUpdate({ _id: id }, { $set: { [`sesiones.${index}`]: cita } })
-    .then(async (data) => {
-      return await Paciente.findOneAndUpdate({ _id: body.idpaciente }, { $set: { ultimodoctor: body.doctor , sucursal: body.sucursal, citaproxima: body.citaprogramada, estado: body.estadopaciente } })
-        
+    .then((data) => {
+      return Paciente.findOneAndUpdate({ _id: body.idpaciente }, { $set: { ultimodoctor: body.doctor , sucursal: body.sucursal, citaproxima: body.citaprogramada, estado: body.estadopaciente } })  
     })
     .then(() => {
-      console.log('cargado')
+      console.log('guardado con exito')
       return res.json(body.idpaciente)
     })
-    .catch(err => console.error(err))
     .catch(err => console.error(err))
 }
 
