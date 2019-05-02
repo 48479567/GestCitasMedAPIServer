@@ -6,27 +6,29 @@ let putCita = (req, res) => {
     { id } = req.params,
     { index } = req.params
   
-    let cita = {
-      numero: body.numero,
-      tratamiento: body.tratamiento,
-      descripcion: body.descripcion,
-      estado: true,
-      fechaprogramada: body.fechaprogramada,
-      fechaejecutada: body.fechaejecutada,
-      tipocita: body.tipocita,
-      doctor: body.doctor,
-      sucursal: body.sucursal
-  
-    }
+  let cita = {
+    numero: body.numero,
+    tratamiento: body.tratamiento,
+    descripcion: body.descripcion,
+    estado: true,
+    fechaprogramada: body.fechaprogramada,
+    fechaejecutada: body.fechaejecutada,
+    tipocita: body.tipocita,
+    doctor: body.doctor,
+    sucursal: body.sucursal
+
+  }
  
-  return Citas.findOneAndUpdate({ _id: id }, { $set: { [`sesiones.${index}`]: cita } })
-    .then((data) => {
-      return Paciente.findOneAndUpdate({ _id: body.idpaciente }, { $set: { ultimodoctor: body.doctor , sucursal: body.sucursal, citaproxima: body.citaprogramada, estado: body.estadopaciente } })
+  Citas.findOneAndUpdate({ _id: id }, { $set: { [`sesiones.${index}`]: cita } })
+    .then(async (data) => {
+      return await Paciente.findOneAndUpdate({ _id: body.idpaciente }, { $set: { ultimodoctor: body.doctor , sucursal: body.sucursal, citaproxima: body.citaprogramada, estado: body.estadopaciente } })
         
     })
-    .then((paciente) => {
-      return res.json(paciente._id)
+    .then(() => {
+      console.log('cargado')
+      return res.json(body.idpaciente)
     })
+    .catch(err => console.error(err))
     .catch(err => console.error(err))
 }
 

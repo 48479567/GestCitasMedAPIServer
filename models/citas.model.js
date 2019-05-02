@@ -5,8 +5,8 @@ let CitasSchema = new Schema({
   paciente: {
   type: Schema.Types.ObjectId,
   ref: 'Paciente',
+}, 
   recurrencia: Number,
-  }, 
   sesiones: [{
     numero: Number,
     tratamiento: String,

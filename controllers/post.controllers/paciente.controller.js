@@ -1,4 +1,5 @@
-const Paciente = require('../../models/paciente.model')
+const Paciente = require('../../models/paciente.model'),
+  Citas = require('../../models/citas.model')
 
 let postPaciente = (req, res) => { 
   let body = req.body
@@ -20,7 +21,16 @@ let postPaciente = (req, res) => {
   
   savePaciente.save()
     .then((paciente) => {
-      return res.json(paciente._id)
+      let saveCita = new Citas({
+        paciente: paciente._id,
+        recurrencia: paciente.recurrencia,
+        sesiones: [],
+      })
+
+      return saveCita.save()
+    })
+    .then((citas) => {
+      return res.json(citas)
     })
     .catch(err => {
       console.error(err)
