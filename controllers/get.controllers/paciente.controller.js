@@ -35,7 +35,7 @@ let getPacientesTipo = (req, res) => {
 
 let getPaciente = (req, res) => {
   let idPaciente = req.params.id
-  Paciente.findOne({_id: idPaciente})
+  Paciente.findOne({_id: idPaciente}).populate('ultimodoctor').populate('sucursal')
     .then(data => {
       return res.json(data)
     })

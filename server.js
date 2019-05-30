@@ -25,7 +25,7 @@ app
     // Añade los metodos especificos.
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE')
     // Autorizacion a todo tipo de autentificaciones.
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept")
     next()
   })
   .use(bodyParser.urlencoded({extended: true}))

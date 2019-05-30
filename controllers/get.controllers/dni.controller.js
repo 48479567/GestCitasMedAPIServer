@@ -18,7 +18,7 @@ let getDNI = (req, res, next) => {
       return res.send(objetoDNI)
     })
     .catch(err => {
-      return res.status(500).json(
+      return res.status(400).json(
         err.data
       )
     })
