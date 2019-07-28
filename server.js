@@ -3,18 +3,20 @@ const express = require('express'),
       bodyParser = require('body-parser'),
       bcrypt = require('bcryptjs'),
       hbs = require('hbs'),
+      // logger = require('morgan'),
       path = require('path'),
       app = express(),
-      CONNECTION_URI = 'mongodb+srv://admin:admin@clusterprojects-e96mt.mongodb.net/gcm?retryWrites=true'
+      CONNECTION_URI = 'mongodb+srv://admin:admin@clusterprojects-e96mt.mongodb.net/gcm?retryWrites=true',
       c = console.log,
-      ce = console.error,
+      ce = console.error
 
 // hbs.registerPartial(path.join(__dirname, 'views', 'partials'))
 
-// sett
+// setting
 app
+  // .use(logger('combined'))
   .set('port', process.env.PORT || 3000)
-  .set('connecturi', 'mongodb://localhost/gcm')
+  .set('connecturi', CONNECTION_URI)
   .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'hbs')
 
